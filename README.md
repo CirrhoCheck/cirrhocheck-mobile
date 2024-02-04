@@ -1,11 +1,15 @@
-# cirrocheck
+# Cirrocheck
 
-A new Flutter project.
+---
 
-## Tautan APK
-[APK Cirrocheck]
+# Made by Group 1 PPL C for Software Engineering Project
 
-## Nama-nama anggota kelompok
+Consisted of:
+- **Member 1**: [Name 1] - NPM
+- **Member 2**: [Name 2] - NPM
+- **Member 3**: [Name 3] - NPM
+- **Member 4**: [Name 4] - NPM
 
+---
 
-## Deskripsi aplikasi
+# Medical Calculator for Cirrhosis
