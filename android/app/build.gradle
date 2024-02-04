@@ -61,7 +61,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/macbookpro16/release-keystore.jks')
+            storeFile file("/Users/macbookpro16/release-keystore.jks")
             storePassword = "cirrhocheck"
             keyAlias = "release"
             keyPassword = "cirrhocheck"
