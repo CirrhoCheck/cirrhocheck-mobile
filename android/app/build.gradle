@@ -63,7 +63,7 @@ android {
         release {
             keyAlias 'release'
             keyPassword 'cirrhocheck'
-            storeFile file('/Users/macbookpro16/release-keystore.jks')
+            storeFile file('keystore/release-keystore.jks')
             storePassword 'cirrhocheck'
         }
     }
