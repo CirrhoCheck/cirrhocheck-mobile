@@ -20,10 +20,10 @@ Consisted of:
 ## CirrhoCheck is a Flutter-based medical calculator designed to assist healthcare professionals in managing patients with cirrhosis. The application provide accurate and efficient calculations. It caters to two primary types of scenarios: Consultation and Emergency situations.
 
 ### 1. Consultation
-User Profile Data: Collects important user details for thorough consultations.
-Database Connectivity: Safely stores and retrieves patient information.
-Consultation History: Easily find past consultations by NIK (National Identification Number) or Name.
+- User Profile Data: Collects important user details for thorough consultations.
+- Database Connectivity: Safely stores and retrieves patient information.
+- Consultation History: Easily find past consultations by NIK (National Identification Number) or Name.
 ### 2. Emergency Situations
-Quick Access: Designed for urgent situations like Emergency Rooms (UGD/IGD).
-No User Profile Requirement: Swift assistance without needing user details.
+- Quick Access: Designed for urgent situations like Emergency Rooms (UGD/IGD).
+- No User Profile Requirement: Swift assistance without needing user details.
 
