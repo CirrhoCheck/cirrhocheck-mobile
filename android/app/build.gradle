@@ -21,9 +21,22 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+def myKeystoreProperties = new Properties()
+    def myKeystorePropertiesFile = rootProject.file('key.properties')
+
+    if (myKeystorePropertiesFile.exists()) {
+        myKeystoreProperties.load(new FileInputStream(myKeystorePropertiesFile))
+    }
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -53,11 +66,81 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+             storeFile file("../../release-keystore.jks")
+             storePassword = "cirrhocheck"
+             keyAlias = "release"
+             keyPassword = "cirrhocheck"
+     }
+    }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+    }
+
+    afterEvaluate {
+        if(System.getenv("IS_CI_BUILD") == "true"){
+            // if you are creating bundle for release build then task name below will be bundleRelease
+            // if apk, then it will be assembleRelease
+            // if any flavor then, for staging flavor it will be bundleStagingRelease and assembleStagingRelease respectively
+            def bundleTask = project.tasks.findByName('assembleRelease')
+
+            // Create a custom task to run after bundleRelease or assembleRelease
+            task copyBuildTask(dependsOn: bundleTask) {
+                // Configure your custom task here
+                doLast {
+                    // Code to run after bundleRelease or asssembleRelease for appcenter
+                    println "Copying builds..."
+
+                    // if any flavor then path will change accordingly, for staging it will be -
+                    // def apkPath = file('../../build/app/outputs/flutter-apk/app-staging-release.apk')
+                    def apkPath = file('../../build/app/outputs/flutter-apk/app-release.apk')
+                    if(apkPath.exists()) {
+                        def apkDir = file('build/outputs/apk/')
+                        apkDir.mkdirs()
+                        copy {
+                            from apkPath.parent
+                            into apkDir
+                            include apkPath.name
+                        }
+                        println "Apk file moved to: ${apkDir}/${apkPath.name}"
+                    }
+
+                    // if any flavor then path will change accordingly, for staging it will be -
+                    // def bundlePath = file('../../build/app/outputs/bundle/stagingRelease/app-staging-release.aab')
+                    def bundlePath = file('../../build/app/outputs/bundle/release/app-release.aab')
+                    if(bundlePath.exists()) {
+                        def bundleDir = file('build/outputs/bundle/')
+                        bundleDir.mkdirs()
+                        copy {
+                            from bundlePath.parent
+                            into bundlePath
+                            include bundlePath.name
+                        }
+                        println "AAB file moved to: ${bundleDir}/${bundlePath.name}"
+                    }
+
+                    // if any flavor then path will change accordingly, for staging it will be -
+                    //def mappingPath = file('../../build/app/outputs/mapping/stagingRelease/mapping.txt')
+                    def mappingPath = file('../../build/app/outputs/mapping/release/mapping.txt')
+                    if(mappingPath.exists()) {
+                        def mappingDir = file('build/outputs/mapping/')
+                        mappingDir.mkdirs()
+                        copy {
+                            from mappingPath.parent
+                            into mappingDir
+                            include mappingPath.name
+                        }
+                        println "Mapping file moved to: ${mappingDir}/${mappingPath.name}"
+                    }
+                }
+            }
+
+            if(bundleTask != null) {
+                bundleTask.finalizedBy(copyBuildTask)
+            }
         }
     }
 }
