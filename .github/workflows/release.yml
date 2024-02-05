@@ -5,7 +5,7 @@ name: Release
 on: 
   # Triggers the workflow on push events but only for the main branch
   push:
-    branches: dev-majid
+    branches: [dev-majid]
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -39,12 +39,7 @@ jobs:
       - name: Generate Java keystore
         env: 
           KEY_JKS: ${{ secrets.KEY_JKS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: |
-          echo "Decoding keystore content..."
-          echo "$KEY_JKS" | base64 --decode > ./release-keystore.jks
-          ls -l ./release-keystore.jks
-          keytool -list -keystore ./release-keystore.jks -storepass "$KEY_PASSWORD"
+        run: echo "$KEY_JKS" | base64 --decode > release-keystore.jks 
               
       - name: Build APK
         env:

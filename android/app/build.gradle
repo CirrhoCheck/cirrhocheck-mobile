@@ -68,11 +68,11 @@ android {
 
     signingConfigs {
         release {
-            keyAlias myKeystoreProperties['keyAlias']
-            keyPassword myKeystoreProperties['keyPassword']
-            storeFile myKeystoreProperties['storeFile'] ? file(myKeystoreProperties['storeFile']) : null
-            storePassword myKeystoreProperties['storePassword']
-        }
+             storeFile file("../../release-keystore.jks")
+             storePassword = "cirrhocheck"
+             keyAlias = "release"
+             keyPassword = "cirrhocheck"
+     }
     }
     buildTypes {
         release {
