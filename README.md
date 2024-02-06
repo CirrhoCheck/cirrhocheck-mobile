@@ -1,4 +1,4 @@
-![Fakultas Ilmu Komputer UI]([resources/horizontal-white-en-1.png](https://upload.wikimedia.org/wikipedia/id/thumb/c/c3/Makara_of_Fasilkom_UI.svg/1200px-Makara_of_Fasilkom_UI.svg.png))
+![Fakultas Ilmu Komputer UI](https://upload.wikimedia.org/wikipedia/id/thumb/c/c3/Makara_of_Fasilkom_UI.svg/1200px-Makara_of_Fasilkom_UI.svg.png)
 
 # Cirrhocheck
 
