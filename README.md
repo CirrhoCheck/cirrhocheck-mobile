@@ -27,3 +27,7 @@ Consisted of:
 - Quick Access: Designed for urgent situations like Emergency Rooms (UGD/IGD).
 - No User Profile Requirement: Swift assistance without needing user details.
 
+---
+
+# Link to the App on Microsoft App Center:
+- https://install.appcenter.ms/orgs/cirrhocheck/apps/cirrhocheck/distribution_groups/public
