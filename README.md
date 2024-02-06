@@ -1,3 +1,5 @@
+![Fakultas Ilmu Komputer UI](resources/horizontal-white-en-1.png)
+
 # Cirrhocheck
 
 ---
